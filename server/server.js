@@ -8,9 +8,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended:true}))
 app.use(cors())
 
+const emailToSocketMapping = new Map();
+
 io.on('connection',(Socket)=>{
     Socket.on('join-room',(data)=>{
         const {roomId,emailId} = data;
+        emailToSocketMapping.set(emailId,socket.id);
         Socket.join(roomId);
         Socket.broadcast.to(roomId).email("user-joined",{emailId});
     })
