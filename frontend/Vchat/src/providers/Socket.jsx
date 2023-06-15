@@ -10,7 +10,7 @@ export default function SocketProvider(props) {
     }), [])
     return (
         <SocketContext.Provider value={{ socket }}>
-            {props.children}
+            {props}
         </SocketContext.Provider>
     )
 }
